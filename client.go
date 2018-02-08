@@ -4,14 +4,15 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"golang.org/x/net/context"
 	"io/ioutil"
 	"mime/multipart"
 	"net/http"
 	"net/textproto"
+
+	"golang.org/x/net/context"
 )
 
-const apiURL = "https://graph.facebook.com/v2.6"
+const apiURL = "https://graph.facebook.com/v2.10"
 
 type httpDoer interface {
 	Do(req *http.Request) (*http.Response, error)
@@ -50,6 +51,11 @@ func (c *Client) Send(sendRequest *SendRequest, pageAccessToken string) (*SendRe
 func (c *Client) SendWithContext(ctx context.Context, sendRequest *SendRequest, pageAccessToken string) (*SendResponse, error) {
 	var req *http.Request
 	var err error
+
+	// messaging_type property required since May 7, 2018
+	if sendRequest.MessagingType == "" {
+		sendRequest.MessagingType = MessagingTypeUpdate
+	}
 
 	if isDataMessage(sendRequest) {
 		req, err = c.newFormDataRequest(sendRequest, pageAccessToken)

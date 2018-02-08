@@ -5,6 +5,14 @@ import (
 	"strings"
 )
 
+// constants for messaging_type field
+const (
+	MessagingTypeResponse                   = "RESPONSE"
+	MessagingTypeUpdate                     = "UPDATE"
+	MessagingTypeMessageTag                 = "MESSAGE_TAG"
+	MessagingTypeNonPromotionalSubscription = "NON_PROMOTIONAL_SUBSCRIPTION"
+)
+
 /*------------------------------------------------------
 Send API
 ------------------------------------------------------*/
@@ -192,6 +200,13 @@ func PostbackButton(title, payload string) *Button {
 	}
 }
 
+// WithMessagingType is a fluent helper method for setting messaging_type field.
+func (sr *SendRequest) WithMessagingType(messagingType string) *SendRequest {
+	sr.MessagingType = messagingType
+
+	return sr
+}
+
 // To is a fluent helper method for setting Recipient. It is a mutator
 // and returns the same SendRequest on which it is called to support method chaining.
 func (sr *SendRequest) To(userId string) *SendRequest {
@@ -275,6 +290,7 @@ type SendRequest struct {
 	Recipient        Recipient `json:"recipient" binding:"required"`
 	Message          Message   `json:"message" binding:"required"`
 	NotificationType string    `json:"notification_type,omitempty"`
+	MessagingType    string    `json:"messaging_type" binding:"required"`
 }
 
 // Recipient identifies the user to send to. Either Id or PhoneNumber must be set, but not both.

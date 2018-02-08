@@ -1,7 +1,6 @@
 # Package `fbmessenger`
 
-[![CircleCI](https://circleci.com/gh/ekyoung/fbmessenger.svg?style=svg)](https://circleci.com/gh/ekyoung/fbmessenger)
-[![GoDoc](https://godoc.org/github.com/ekyoung/fbmessenger?status.svg)](https://godoc.org/github.com/ekyoung/fbmessenger)
+[![GoDoc](https://godoc.org/github.com/retsu0/fbmessenger?status.svg)](https://godoc.org/github.com/retsu0/fbmessenger)
 
 Go (golang) package for writing bots on the [Facebook Messenger Platform](https://developers.facebook.com/docs/messenger-platform).
 
@@ -14,7 +13,7 @@ Go (golang) package for writing bots on the [Facebook Messenger Platform](https:
 ## Installation
 
 ```bash
-go get gopkg.in/ekyoung/fbmessenger.v1
+go get gopkg.in/retsu0/fbmessenger.v1
 ```
 
 ## Quick Start
