@@ -10,7 +10,6 @@ const (
 	MessagingTypeResponse                   = "RESPONSE"
 	MessagingTypeUpdate                     = "UPDATE"
 	MessagingTypeMessageTag                 = "MESSAGE_TAG"
-	MessagingTypeNonPromotionalSubscription = "NON_PROMOTIONAL_SUBSCRIPTION"
 )
 
 /*------------------------------------------------------
