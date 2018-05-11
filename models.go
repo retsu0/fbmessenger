@@ -7,9 +7,29 @@ import (
 
 // constants for messaging_type field
 const (
-	MessagingTypeResponse                   = "RESPONSE"
-	MessagingTypeUpdate                     = "UPDATE"
-	MessagingTypeMessageTag                 = "MESSAGE_TAG"
+	MessagingTypeResponse   = "RESPONSE"
+	MessagingTypeUpdate     = "UPDATE"
+	MessagingTypeMessageTag = "MESSAGE_TAG"
+)
+
+// constants for message tags
+const (
+	MessageTagCommunityAlert             = "COMMUNITY_ALERT"
+	MessageTagConfirmedEventReminder     = "CONFIRMED_EVENT_REMINDER"
+	MessageTagNonPromotionalSubscription = "NON_PROMOTIONAL_SUBSCRIPTION"
+	MessageTagPairingUpdate              = "PAIRING_UPDATE"
+	MessageTagApplicationUpdate          = "APPLICATION_UPDATE"
+	MessageTagAccountUpdate              = "ACCOUNT_UPDATE"
+	MessageTagPaymentUpdate              = "PAYMENT_UPDATE"
+	MessageTagPersonalFinanceUpdate      = "PERSONAL_FINANCE_UPDATE"
+	MessageTagShippingUpdate             = "SHIPPING_UPDATE"
+	MessageTagReservationUpdate          = "RESERVATION_UPDATE"
+	MessageTagMIssueResolution           = "ISSUE_RESOLUTION"
+	MessageTagAppointmentUpdate          = "APPOINTMENT_UPDATE"
+	MessageTagGameEvent                  = "GAME_EVENT"
+	MessageTagTransportationUpdate       = "TRANSPORTATION_UPDATE"
+	MessageTagFeatureFunctionalityUpdate = "FEATURE_FUNCTIONALITY_UPDATE"
+	MessageTagTicketUpdate               = "TICKET_UPDATE"
 )
 
 /*------------------------------------------------------
@@ -206,6 +226,13 @@ func (sr *SendRequest) WithMessagingType(messagingType string) *SendRequest {
 	return sr
 }
 
+// WithMessageTag is a fluent helper method for setting tag field.
+func (sr *SendRequest) WithMessageTag(tag string) *SendRequest {
+	sr.Tag = tag
+
+	return sr
+}
+
 // To is a fluent helper method for setting Recipient. It is a mutator
 // and returns the same SendRequest on which it is called to support method chaining.
 func (sr *SendRequest) To(userId string) *SendRequest {
@@ -290,6 +317,7 @@ type SendRequest struct {
 	Message          Message   `json:"message" binding:"required"`
 	NotificationType string    `json:"notification_type,omitempty"`
 	MessagingType    string    `json:"messaging_type" binding:"required"`
+	Tag              string    `json:"tag,omitempty"`
 }
 
 // Recipient identifies the user to send to. Either Id or PhoneNumber must be set, but not both.
