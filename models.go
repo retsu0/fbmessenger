@@ -514,13 +514,14 @@ The Sender and Recipient fields are common to all types of callbacks and the
 other fields only apply to specific types of callbacks.
 */
 type MessagingEntry struct {
-	Sender    Principal        `json:"sender" binding:"required"`
-	Recipient Principal        `json:"recipient" binding:"required"`
-	Timestamp int              `json:"timestamp"`
-	Message   *CallbackMessage `json:"message"`
-	Delivery  *Delivery        `json:"delivery"`
-	Postback  *Postback        `json:"postback"`
-	OptIn     *OptIn           `json:"optin"`
+	Sender         Principal        `json:"sender" binding:"required"`
+	Recipient      Principal        `json:"recipient" binding:"required"`
+	Timestamp      int              `json:"timestamp"`
+	Message        *CallbackMessage `json:"message"`
+	Delivery       *Delivery        `json:"delivery"`
+	Postback       *Postback        `json:"postback"`
+	OptIn          *OptIn           `json:"optin"`
+	MessageRequest string           `json:"message_request"`
 }
 
 // Principal holds the Id of a sender or recipient.
