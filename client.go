@@ -162,13 +162,18 @@ func writeFormField(w *multipart.Writer, fieldName string, value interface{}) er
 }
 
 // GetUserProfile GETs a profile with more information about the user.
-func (c *Client) GetUserProfile(userId, pageAccessToken string) (*UserProfile, error) {
-	return c.GetUserProfileWithContext(context.Background(), userId, pageAccessToken)
+func (c *Client) GetUserProfile(userId, fields, pageAccessToken string) (*UserProfile, error) {
+	return c.GetUserProfileWithContext(context.Background(), userId, fields, pageAccessToken)
 }
 
 // GetUserProfileWithContext is like GetUserProfile but allows you to timeout or cancel the request using context.Context.
-func (c *Client) GetUserProfileWithContext(ctx context.Context, userId, pageAccessToken string) (*UserProfile, error) {
-	url := c.buildURL(fmt.Sprintf("/%v?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token=%v", userId, pageAccessToken))
+func (c *Client) GetUserProfileWithContext(ctx context.Context, userId, fields, pageAccessToken string) (*UserProfile, error) {
+	url := ""
+	if fields == "" {
+		url = c.buildURL(fmt.Sprintf("/%v?access_token=%v", userId, pageAccessToken))
+	} else {
+		url = c.buildURL(fmt.Sprintf("/%v?fields=%v&access_token=%v", userId, fields, pageAccessToken))
+	}
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {

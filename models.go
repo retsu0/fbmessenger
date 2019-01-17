@@ -608,10 +608,11 @@ UserProfile represents additional information about the user.
 See https://developers.facebook.com/docs/messenger-platform/user-profile
 */
 type UserProfile struct {
-	FirstName       string `json:"first_name"`
-	LastName        string `json:"last_name"`
-	ProfilePhotoURL string `json:"profile_pic"`
-	Locale          string `json:"locale"`
-	Timezone        int    `json:"timezone"`
-	Gender          string `json:"gender"`
+	FirstName       string     `json:"first_name"`
+	LastName        string     `json:"last_name"`
+	ProfilePhotoURL string     `json:"profile_pic"`
+	Locale          string     `json:"locale"`
+	Timezone        int        `json:"timezone"`
+	Gender          string     `json:"gender"`
+	Error           *SendError `json:"error"`
 }
